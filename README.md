@@ -16,7 +16,7 @@ EditControl edit1 = new EditControl() { Background = Brushes.White, DocumentLang
 this.Content = edit1;
 ```
 Output:
- ![WPF_EditControl_Display_FormattedHtm](Output_Edit_Display_FormattedHtml.png)
+ ![WPF_EditControl_Display_FormattedHtml](Output_Edit_Display_FormattedHtml.png)
 
 
 The below lines of code explain to display the formatted html at runtime in WPF EditControl
@@ -32,3 +32,6 @@ this.Content = edit1;
 ```
 
 Output
+
+![WPF_EditControl_Display_FormattedHtm1](Edit-FormattedHtml.gif)
+
