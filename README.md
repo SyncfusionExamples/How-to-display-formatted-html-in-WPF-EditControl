@@ -1,9 +1,9 @@
 # How-to-display-formatted-html-in-WPF-EditControl
 This repository contains the sample that how to display formatted html in WPF EditControl
 
-The DocumentLanguage property of the EditControl enables the users to select and display the language. To display a html file, the  DocumentLanguage enum type property value can be set to HTML (Default value as Text). 
+The DocumentLanguage property of the EditControl enables the users to select and display the language. To display a html file, the  DocumentLanguage enum type property value can be set to HTML. 
 
-The below lines of code explain to display the formatted html file while loading itself using DocumentSource   property in WPF EditControl.
+The below lines of code explain to display the formatted html file while loading itself using DocumentSource property in WPF EditControl.
 
 ```XAML:
 
