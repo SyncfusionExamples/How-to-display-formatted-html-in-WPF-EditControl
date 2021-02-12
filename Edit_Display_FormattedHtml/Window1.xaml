@@ -1,0 +1,235 @@
+﻿<Window
+    x:Class="IronPythonDemo.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:interactivity="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:IronPythonDemo"
+    xmlns:skinManager="clr-namespace:Syncfusion.SfSkinManager;assembly=Syncfusion.SfSkinManager.WPF"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    x:Name="window"
+    Title="Custom Language"
+    Width="750"
+    Height="600"
+    skinManager:SfSkinManager.VisualStyle="Office2016Colorful"
+    Icon="App.ico"
+    Style="{StaticResource windowStyle}"
+    WindowStartupLocation="CenterScreen">
+
+    <!--<Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Syncfusion.Shared.WPF;component/SkinManager/SkinManager.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <syncfusion:FormatsCollection x:Key="HtmlLanguageFormats">
+                <syncfusion:EditFormats Foreground="Green" FormatName="CommentFormat" />
+                <syncfusion:EditFormats Foreground="Brown" FormatName="KeywordFormat" />
+                <syncfusion:EditFormats Foreground="Red" FormatName="VariableFormat" />
+                
+            </syncfusion:FormatsCollection>
+            <syncfusion:LexemCollection x:Key="HtmlLanguageLexems">
+
+                <syncfusion:Lexem StartText="body" ContainsEndText="False" IsMultiline="False" LexemType="Keyword" FormatName="KeywordFormat"/>
+                <syncfusion:Lexem StartText="color" ContainsEndText="False" IsMultiline="False" LexemType="Keyword" FormatName="VariableFormat"/>
+                <syncfusion:Lexem StartText="text-align" ContainsEndText="False" IsMultiline="False" LexemType="Keyword" FormatName="VariableFormat"/>
+                <syncfusion:Lexem StartText="font-family" ContainsEndText="False" IsMultiline="False" LexemType="Keyword" FormatName="VariableFormat"/>
+                <syncfusion:Lexem StartText="font-size" ContainsEndText="False" IsMultiline="False" LexemType="Keyword" FormatName="VariableFormat"/>
+                <syncfusion:Lexem StartText="/*" EndText="*/" ContainsEndText="True" IsMultiline="False" LexemType="Comment" FormatName="CommentFormat"/>
+               
+            </syncfusion:LexemCollection>
+        </ResourceDictionary>
+    </Window.Resources>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Menu
+            Grid.ColumnSpan="2"
+            BorderBrush="LightGray"
+            BorderThickness="1">
+            <MenuItem
+                Width="{Binding}"
+                Background="Transparent"
+                Header="_File">
+                <MenuItem Command="{x:Static syncfusion:EditCommands.New}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Open}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Save}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.SaveAs}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem
+                    Command="{Binding ExitCommand}"
+                    CommandParameter="{Binding ElementName=window}"
+                    Header="Exit" />
+            </MenuItem>
+            <MenuItem
+                Width="{Binding}"
+                Background="Transparent"
+                Header="_Edit">
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Undo}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Redo}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Cut}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Copy}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.Paste}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Command="{x:Static syncfusion:EditCommands.SelectAll}" CommandTarget="{Binding ElementName=Edit1}" />
+                <MenuItem Header="Find and Replace">
+                    <MenuItem Command="{x:Static syncfusion:EditCommands.Find}" CommandTarget="{Binding ElementName=Edit1}" />
+                    <MenuItem Command="{x:Static syncfusion:EditCommands.Replace}" CommandTarget="{Binding ElementName=Edit1}" />
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Options">
+                <MenuItem
+                    Header="Accepts Tab"
+                    IsCheckable="True"
+                    IsChecked="{Binding ElementName=Edit1, Path=AcceptsTab}" />
+                <MenuItem
+                    Header="Is ReadOnly"
+                    IsCheckable="True"
+                    IsChecked="{Binding ElementName=Edit1, Path=IsReadOnly}" />
+                <MenuItem
+                    Header="Show Line Number"
+                    IsCheckable="True"
+                    IsChecked="{Binding ElementName=Edit1, Path=ShowLineNumber}" />
+                <MenuItem
+                    Header="Show Default Context Menu"
+                    IsCheckable="True"
+                    IsChecked="{Binding ElementName=Edit1, Path=ShowDefaultContextMenu}" />
+            </MenuItem>
+        </Menu>
+        <ToolBar
+            Grid.Row="1"
+            Grid.ColumnSpan="1"
+            Margin="-1">
+            <Button
+                Command="{x:Static syncfusion:EditCommands.New}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="New">
+                <Image Source="../../Resources/new.gif" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Open}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Open">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="../../Resources/open.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Save}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Save">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="../../Resources/Save.png" />
+            </Button>
+            <Separator />
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Cut}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Cut"
+                ToolTipService.ShowOnDisabled="True">
+                <Image Source="../../Resources/Cut.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Copy}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Copy"
+                ToolTipService.ShowOnDisabled="True">
+                <Image Source="../../Resources/Copy.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Paste}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Paste"
+                ToolTipService.ShowOnDisabled="True">
+                <Image Source="../../Resources/Paste.png" />
+            </Button>
+            <Separator />
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Undo}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Undo"
+                ToolTipService.ShowOnDisabled="True">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="../../Resources/undo.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.Redo}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Redo"
+                ToolTipService.ShowOnDisabled="True">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="../../Resources/redo.png" />
+            </Button>
+            <Separator />
+            <ComboBox
+                Name="fontlist"
+                Grid.Column="1"
+                Width="120"
+                Margin="3"
+                ItemsSource="{x:Static Fonts.SystemFontFamilies}"
+                SelectedItem="{Binding SelectedFont}"
+                ToolTip="Font" />
+            <ComboBox
+                Name="fontsize"
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="3"
+                SelectedIndex="2"
+                ToolTip="Font size">
+                <system:Double>10</system:Double>
+                <system:Double>12</system:Double>
+                <system:Double>13</system:Double>
+                <system:Double>14</system:Double>
+                <system:Double>15</system:Double>
+                <system:Double>16</system:Double>
+                <system:Double>17</system:Double>
+                <system:Double>18</system:Double>
+                <system:Double>20</system:Double>
+            </ComboBox>
+            <Separator />
+            <Button
+                Command="{x:Static syncfusion:EditCommands.DecreaseIndent}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Decrease indent">
+                <Image Source="../../Resources/decreaseindent.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.IncreaseIndent}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Increase indent">
+                <Image Source="../../Resources/increaseindent.png" />
+            </Button>
+            <Separator />
+            <Button
+                Command="{x:Static syncfusion:EditCommands.CommentSelection}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Comment out the selected lines">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="../../Resources/comment.png" />
+            </Button>
+            <Button
+                Command="{x:Static syncfusion:EditCommands.UncommentSelection}"
+                CommandTarget="{Binding ElementName=Edit1}"
+                ToolTip="Uncomment the selected lines">
+                <Image
+                    MaxWidth="16"
+                    MaxHeight="16"
+                    Source="/Syncfusion.Edit.Wpf;component/Resources/uncomment.png" />
+            </Button>
+        </ToolBar>
+        <Border Grid.Row="2" BorderThickness="1">
+            <syncfusion:EditControl
+                Name="edit1"
+                Background="White" DocumentLanguage="HTML" />
+        </Border>
+    </Grid>
+</Window>
